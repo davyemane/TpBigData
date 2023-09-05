@@ -26,6 +26,14 @@ public class TokenizerMapper
         }
 
         word.set(data.get(2));
+        if (isDouble(data.get(3)) == false){
+            word.set(word +" "+ data.get(3));
+        }
+
+        if (isDouble(data.get(4)) == false){
+            word.set(word +" "+ data.get(4));
+        }
+
         val.set(Double.parseDouble(data.get(data.size()-2)));
 
         context.write(word,val);
@@ -33,4 +41,23 @@ public class TokenizerMapper
         data.clear();
 
     }
-}
+    public static boolean isDouble(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        str = str.trim();
+
+        if (str.isEmpty()) {
+            return false;
+        }
+
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c) && c != '.' && c != ',') {
+                return false;
+            }
+        }
+
+        return true;
+    }}
+
